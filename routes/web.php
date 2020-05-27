@@ -20,3 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/clients', 'ClientController@index')->name('clients.index');
+Route::get('/clients/new', 'ClientController@create')->name('clients.create');
+Route::post('/clients', 'ClientController@store')->name('clients.store');
+//Route::delete(, 'ClientController@destroy')->name('clients.destroy');
+Route::delete('/clients/{id}', function () {
+    return view('hola');
+});
