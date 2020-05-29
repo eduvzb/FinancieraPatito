@@ -7,10 +7,10 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div class="">
-                        <h3 class="mb-0">Cliente</h3>
+                        <h3 class="mb-0">Prestamos</h3>
                     </div>
                     <div class="">
-                    <a href="{{ route('clients.create') }}" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ route('loans.create') }}" class="btn btn-primary">Nuevo prestamo</a>
                     </div>
                 </div>
             </div>
@@ -18,24 +18,30 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th >Nombre</th>
-                            <th >Telefono</th>
-                            <th scope="col" >Acciones</th>
+                            <th >Cantidad</th>
+                            <th >Número de pagos</th>
+                            <th >Cuota</th>
+                            <th >Fecha de ministración </th>
+                            <th >Fecha de vencimiento </th>
+                            <th >Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($clients as $client)
+                       @foreach($loans as $loan)
                             <tr>
-                                <td scope="row">{{ $client->id }}</td>
-                                <td>{{ $client->name }}</td>
-                                <td>{{ $client->phone }}</td>
+                                <td>{{ $loan->client->name }}</td>
+                                <td>{{ $loan->amount }}</td>
+                                <td>{{ $loan->payments_number}}</td>
+                                <td>{{ $loan->fee }}</td>
+                                <td>{{ $loan->ministry_date }}</td>
+                                <td>{{ $loan->due_date }}</td>
                                 <td>
                                     <a href="#" class="btn btn-outline-secondary btn-sm">Ver</a>
-                                    <button class="btn btn-outline-danger btn-sm btn-delete" data-id="{{ $client->id }}" >Borrar</button>
+                                    <button class="btn btn-outline-danger btn-sm btn-delete" data-id="{{ $loan->id }}" >Borrar</button>
                                 </td>
                             </tr>
-                        @endforeach
+                       @endforeach
                     </tbody>
                 </table>
             </div>
