@@ -20,7 +20,7 @@
                         <tr>
                             <th >Nombre</th>
                             <th >Cantidad</th>
-                            <th >Número de pagos</th>
+                            <th ># de pagos</th>
                             <th >Cuota</th>
                             <th >Fecha de ministración </th>
                             <th >Fecha de vencimiento </th>

@@ -22,14 +22,21 @@
                             <th >Monto ministrado</th>
                             <th >Cuota</th>
                             <th >Número de pagos</th>
-                            <th >Pagos realizados </th>
                             <th >Saldo abonado</th>
                             <th >Saldo pendiente </th>
                             <th >Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                     
+                        @foreach($payments as $payment)
+                            <tr>
+                                <td>{{ $payment->loan->client->name }}</td>
+                                <td>{{ $payment->loan->amount }}</td>
+                                <td>{{ $payment->loan->fee }}</td>
+                                <td>{{ $payment->loan->payments_number}}</td>
+                                <td>{{ $payment->loan->amount}}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

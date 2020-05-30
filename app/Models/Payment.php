@@ -14,4 +14,8 @@ class Payment extends Model
         'payment_date',
         'received_amount'
     ];
+
+    public function loan(){
+        return $this->belongsTo('App\Models\Loan');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Payment;
 
 class paymentController extends Controller
 {
@@ -13,7 +14,10 @@ class paymentController extends Controller
      */
     public function index()
     {
-        return view('payments.index');
+        $payments = Payment::all()->unique('loan_id');;
+        return view('payments.index',[
+            'payments' => $payments
+        ]);
     }
 
     /**

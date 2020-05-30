@@ -67,11 +67,11 @@ class loanController extends Controller
                 $payment->client_id = $loan->client_id;
                 $payment->loan_id = $loan->id;
                 $payment->number = $count+1;
-                $payment->amount = 0;
+                $payment->amount = $loan->fee;
                 $payment->received_amount = 0;
                 $payment->payment_date = $date;
-                $count++;
                 $payment->save();
+                $count++;
             }
         }
            
