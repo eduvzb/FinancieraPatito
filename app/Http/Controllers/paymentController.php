@@ -14,7 +14,7 @@ class paymentController extends Controller
      */
     public function index()
     {
-        $payments = Payment::all()->unique('loan_id');;
+        $payments = Payment::all()->unique('loan_id');
         return view('payments.index',[
             'payments' => $payments
         ]);
@@ -49,7 +49,7 @@ class paymentController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('payments.show');
     }
 
     /**

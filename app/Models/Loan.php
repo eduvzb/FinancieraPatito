@@ -20,4 +20,15 @@ class Loan extends Model
     {
         return $this->belongsTo('App\Models\Client');
     }
+
+    public function payments()
+    {
+        return $this->hasMany('App\Models\Payment');
+    }
+
+    public function saldo_abonado()
+    {
+        return $this->sum('amount');
+    }
+    
 }

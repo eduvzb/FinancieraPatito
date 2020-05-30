@@ -12,10 +12,11 @@ class Payment extends Model
         'number',
         'amount',
         'payment_date',
-        'received_amount'
+        'received_amount',
     ];
 
     public function loan(){
         return $this->belongsTo('App\Models\Loan');
     }
+
 }

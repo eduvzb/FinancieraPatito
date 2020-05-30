@@ -15,13 +15,18 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('loan_id');
-            $table->integer('number'); //número de pagos
-            $table->decimal('amount');
-            $table->date('payment_date');
-            $table->decimal('received_amount'); //Abonado
+            $table->unsignedBigInteger('client_id');
+            $table->integer('number'); //El número de pago 
+            $table->decimal('amount'); //Monto correspondiente al pago
+            $table->date('payment_date'); //Fecha en la que se debe de pagar 
+            $table->decimal('received_amount')->nullable();//Monto
             $table->timestamps();
+
+             //Llave foranea 
+             $table->foreign('loan_id')
+             ->references('id')
+             ->on('loans');
         });
     }
 
