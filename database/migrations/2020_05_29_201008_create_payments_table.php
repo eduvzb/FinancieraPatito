@@ -17,10 +17,10 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('loan_id');
-            $table->integer('number');
+            $table->integer('number'); //número de pagos
             $table->decimal('amount');
             $table->date('payment_date');
-            $table->decimal('received_amount');
+            $table->decimal('received_amount'); //Abonado
             $table->timestamps();
         });
     }

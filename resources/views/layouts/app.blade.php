@@ -38,6 +38,9 @@
                         <li class="nav-item ">
                             <a class="nav-link" href={{route('loans.index')}}> Prestamos <span class="sr-only">(current)</span></a>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href={{route('payments.index')}}> Pagos <span class="sr-only">(current)</span></a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

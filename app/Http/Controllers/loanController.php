@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Loan;
+use App\Models\Payment;
+use Carbon\Carbon;
 
 class loanController extends Controller
 {
@@ -44,16 +46,7 @@ class loanController extends Controller
     public function store(Request $request)
     {
 
-        /*  $request->validate([
-            'client_id' => 'required',
-            'amount' => 'required',
-            'payments_number' => 'required',
-            'fee' => 'required',
-            'ministry_date' => 'required',
-            'due_date' => 'required'
-        ]);  */
-        
-        $loan = new loan();
+        $loan = new Loan();
         $loan->client_id = $request->client_id;
         $loan->amount = $request->amount;
         $loan->payments_number = $request->payments_number;
@@ -62,7 +55,29 @@ class loanController extends Controller
         $loan->due_date = $request->due_date;
         $loan->finished = 0;
         $loan->save();
+        $date = Carbon::createFromDate($loan->ministry_date); //Guarda la fecha en la varible date
+        
+        $count = 0;
+        while($count < $loan->payments_number)
+        {
+            $date->addDay(); //Incrementa un día a la fecha date
+            if($date->isWeekday()) //Verificar si date es día de semana
+            {
+                $payment = new Payment();
+                $payment->client_id = $loan->client_id;
+                $payment->loan_id = $loan->id;
+                $payment->number = $count+1;
+                $payment->amount = 0;
+                $payment->received_amount = 0;
+                $payment->payment_date = $date;
+                $count++;
+                $payment->save();
+            }
+        }
+           
+        
 
+    
         return redirect()->route('loans.index');
     }
 

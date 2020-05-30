@@ -27,3 +27,5 @@ Route::post('/clients', 'ClientController@store')->name('clients.store');
 Route::get('/loans', 'LoanController@index')->name('loans.index');
 Route::get('/loans/new', 'LoanController@create')->name('loans.create');
 Route::post('/loans', 'LoanController@store')->name('loans.store');
+
+Route::get('/payments','PaymentController@index')->name('payments.index');
