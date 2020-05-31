@@ -26,9 +26,6 @@ class Loan extends Model
         return $this->hasMany('App\Models\Payment');
     }
 
-    public function saldo_abonado()
-    {
-        return $this->sum('amount');
-    }
+   
     
 }

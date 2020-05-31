@@ -96,6 +96,7 @@ class clientController extends Controller
     public function destroy($id)
     {
         $client = Clients::find($id);
+        dd($client);
         return $client;
     }
 }

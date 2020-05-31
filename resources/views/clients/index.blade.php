@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row ">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-8 mx-auto">
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
@@ -45,38 +45,44 @@
 @endsection
 
 @section('bottom-js')
-    <script>
-        $('body').on('click', '.btn-delete', function(event)
-        {
-            const id = $(this).data('id');
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            })
-            .then((result) => { 
-               if (result.value){
-                   axios.delete('{{ route('clients.index') }}/' + id)
+<script>
+    $('body').on('click', '.btn-delete', function(event) {
+        const id = $(this).data('id');
+
+        const options = {
+        headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' }
+        };
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'No podrás revertir esta acción',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, borralo!'
+        })
+        .then((result) => {
+            if (result.value) {
+                axios.delete('{{ route('clients.index') }}/' + id)
                     .then(result => {
-                        Swal.fire(
-                            'Borrado',
-                            'El cliente ha sido borrado',
-                            'success'
-                        );
+                        Swal.fire({
+                            title: 'Borrado',
+                            text: 'El cliente a sido borrado',
+                            icon: 'success'
+                        }).then(() => {
+                            window.location.href='{{ route('clients.index') }}';
+                        });
                     })
                     .catch(error => {
                         Swal.fire(
-                            'Ha ocurrido un error',
-                            'El cliente no ha sido eliminado',
+                            'Ocurrió un error',
+                            'El cliente no ha podido borrarse.',
                             'error'
                         );
                     });
-               }
-            });
+            }
         });
-    </script>
+    });
+</script>
 @endsection

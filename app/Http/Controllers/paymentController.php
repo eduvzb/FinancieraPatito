@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Payment;
+use App\Models\Loan;
+use Carbon\Carbon;
+
 
 class paymentController extends Controller
 {
@@ -25,9 +28,12 @@ class paymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function pay($id)
     {
-        //
+        $loan = Loan::find($id);
+        return view('payments.pay',[
+            'loan' => $loan
+        ]);
     }
 
     /**
@@ -36,9 +42,9 @@ class paymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -49,7 +55,10 @@ class paymentController extends Controller
      */
     public function show($id)
     {
-        return view('payments.show');
+        $loans = Loan::find($id);
+        return view('payments.show',[
+            'loans' => $loans
+        ]);
     }
 
     /**

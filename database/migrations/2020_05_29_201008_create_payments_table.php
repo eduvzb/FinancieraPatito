@@ -20,6 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('number'); //El número de pago 
             $table->decimal('amount'); //Monto correspondiente al pago
             $table->date('payment_date'); //Fecha en la que se debe de pagar 
+            $table->date('receipt_date')->nullable(); //Fecha en la que se recibe el dinero
             $table->decimal('received_amount')->nullable();//Monto
             $table->timestamps();
 
