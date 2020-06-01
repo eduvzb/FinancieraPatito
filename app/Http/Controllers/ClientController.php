@@ -95,8 +95,15 @@ class clientController extends Controller
      */
     public function destroy($id)
     {
-        $client = Clients::find($id);
-        dd($client);
+        $client = Client::find($id);
+        foreach ($client->loans as $loan){
+            foreach($loan->payments as $payment){
+                $payment->delete();
+            }
+            $loan->delete();
+        }
+        $client->delete();
+
         return $client;
     }
 }

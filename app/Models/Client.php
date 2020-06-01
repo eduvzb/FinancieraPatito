@@ -16,4 +16,16 @@ class Client extends Model
     {
         return $this->hasMany('App\Models\Loan');
     }
+
+  /*   public function delete ()
+    {
+        dd($this);
+        foreach ($this->loans as $loan){
+            foreach($loan->payments as $payment){
+                $payment->delete();
+            }
+            $loan->delete();
+        }
+        return $this->delete();
+    } */
 }

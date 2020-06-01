@@ -64,7 +64,7 @@
         })
         .then((result) => {
             if (result.value) {
-                axios.delete('{{ route('clients.index') }}/' + id)
+                axios.delete('{{ route('clients.index') }}/'+ id, options)  
                     .then(result => {
                         Swal.fire({
                             title: 'Borrado',

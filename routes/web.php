@@ -34,6 +34,7 @@ Route::delete('/clients/{id}', 'ClientController@destroy')
 Route::get('/loans', 'LoanController@index')->name('loans.index');
 Route::get('/loans/new', 'LoanController@create')->name('loans.create');
 Route::post('/loans', 'LoanController@store')->name('loans.store');
+Route::delete('/loans/{id}', 'LoanController@destroy')->name('loans.destroy');
 
 Route::get('/payments','PaymentController@index')->name('payments.index');
 Route::get('/payments/{id}', 'PaymentController@show')->name('payments.show');

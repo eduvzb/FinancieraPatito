@@ -123,6 +123,11 @@ class loanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $loan = Loan::find($id);
+        foreach($loan->payments as $payment)
+        {
+            $payment->delete();
+        }
+        $loan->delete();
     }
 }
