@@ -20,28 +20,30 @@
                 <table class="table">
                     <thead >
                         <tr >
+                            <th >#</th>
                             <th >Nombre</th>
                             <th >Monto ministrado</th>
                             <th >Cuota</th>
                             <th ># de pagos</th>
-                            <th >Pagos realizados</th>
+                            <th >Pagos completados</th>
                             <th >Saldo abonado</th>
                             <th >Saldo pendiente </th>
                             <th >Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($payments as $payment)
+                        @foreach($loans as $loan)
                             <tr>
-                                <td>{{ $payment->loan->client->name }}</td>
-                                <td>$ {{ $payment->loan->amount }}</td>
-                                <td>{{ $payment->loan->fee }}</td>
-                                <td>{{ $payment->loan->payments_number}}</td>
-                                <td> </td>
-                                <td>$ {{ $payment->sum('received_amount')}}</td>
-                                <td>$ {{ $payment->loan->amount - $payment->sum('received_amount') }}</td>
-                                <td>
-                                <a href="{{ route( 'payments.show',['id'=>$payment->loan->id] ) }}" class="btn btn-outline-secondary btn-sm">Ver</a>
+                                <td> {{ $loan->id }}</td>
+                                <td>{{ $loan->client->name }}</td>
+                                <td>$ {{ $loan->amount }}</td>
+                                <td>$ {{ $loan->fee}}  </td>
+                                <td> {{ $loan->payments_number }}</td>
+                                <td>$ {{ $loan->pagosCompletados}} </td>
+                                <td>$ {{ $loan->saldoAbonado}}</td>
+                                <td>$ {{ $loan->saldoPendiente}} </td>
+                                <td> 
+                                    <a href="{{ route('payments.show',['id' => $loan->id]) }}" class="btn btn-outline-secondary btn-sm">Ver</a>
                                 </td>
                             </tr>
                         @endforeach

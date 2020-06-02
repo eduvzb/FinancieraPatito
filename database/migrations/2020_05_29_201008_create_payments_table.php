@@ -22,6 +22,7 @@ class CreatePaymentsTable extends Migration
             $table->date('payment_date'); //Fecha en la que se debe de pagar 
             $table->date('receipt_date')->nullable(); //Fecha en la que se recibe el dinero
             $table->decimal('received_amount')->nullable();//Monto
+            $table->boolean('paid')->default(0);
             $table->timestamps();
 
              //Llave foranea 

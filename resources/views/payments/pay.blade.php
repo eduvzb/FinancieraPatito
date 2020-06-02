@@ -10,7 +10,7 @@
                         <h3>Abonar</h3>
                     </div>
                     <div class="">
-                        <a href="{{ route('payments.show',['id' => $loan->id]) }}" class="btn btn-danger">Cancelar</a>
+                        <a href="{{ route('payments.show',['id' => $loan->id]) }}" class="btn btn-outline-danger">Cancelar</a>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                             </div>
                             @enderror
                             <div class="form-group mt-4">
-                                <button type="submit" class="btn btn-success btn-block">Pagar</button>
+                                <button type="submit" class="btn btn-outline-success btn-block">Pagar</button>
                             </div>
                         </div>
                         

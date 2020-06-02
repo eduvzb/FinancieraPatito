@@ -17,9 +17,9 @@ class paymentController extends Controller
      */
     public function index()
     {
-        $payments = Payment::all()->unique('loan_id');
+        $loans = Loan::orderBy('id')->get();
         return view('payments.index',[
-            'payments' => $payments
+            'loans' => $loans
         ]);
     }
 
@@ -44,7 +44,37 @@ class paymentController extends Controller
      */
     public function store(Request $request, $id)
     {
-        
+        $payments = Payment::where('loan_id', $id)
+        ->where('paid',0)
+        ->orderBy('number')
+        ->get();
+        $acum = $request->received_amount;
+         foreach($payments as $payment)
+         {
+             $amount = $payment->amount;
+             if( $amount > $acum && $acum>0){
+                 //dd($acum);
+                 $payment->received_amount+= $acum;
+                 $payment->receipt_date = Carbon::now();
+                    if($payment->received_amount == $amount){
+                        $payment->paid = 1;
+                    }
+                 $payment->save();
+                 break;
+             }
+             else if ($amount <= $acum){
+                 $dif = $amount - $payment->received_amount;
+                 $payment->received_amount+= $dif;
+                 $payment->paid = 1;
+                 $payment->receipt_date = Carbon::now();
+                 $payment->save();
+                 $acum-= $dif;
+             }
+         }
+
+         return redirect()->route('payments.show', [
+             'id'=> $id
+         ]);
     }
 
     /**

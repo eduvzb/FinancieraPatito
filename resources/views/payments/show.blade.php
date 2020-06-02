@@ -11,8 +11,8 @@
                     <div class="card-body ">
                         <ul class="list-unstyled">
                             <li class="h1">{{ $loans->client->name }}</li>
-                            <li class="lead"><strong>Saldo abonado: </strong> $</li>
-                            <li class="lead"><strong>Total pendiente: </strong> $ {{ $loans->payments->sum('received_amount')}} </li>
+                        <li class="lead"><strong>Saldo abonado: </strong> $  {{ $loans->saldoAbonado}} </li>
+                            <li class="lead"><strong>Total pendiente: </strong> $ {{ $loans->saldoPendiente }} </li>
                         </ul>
                     <a href="{{ route('payments.pay',['id' => $loans->id]) }}" class="btn btn-outline-secondary btn-block">Abonar</a>
                     </div>
@@ -44,12 +44,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($loans->payments as $payment) 
+                        @foreach($loans->paymentsOrderBy as $payment) 
                             <tr>
                                 <td>{{ $payment->number }}</td>
                                 <td>{{ $payment->amount }}</td>
                                 <td>{{ $payment->received_amount }}</td>
                                 <td>{{ $payment->payment_date }}</td>
+                                <td>{{ $payment->receipt_date}}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -26,6 +26,27 @@ class Loan extends Model
         return $this->hasMany('App\Models\Payment');
     }
 
-   
+    public function paymentsOrderBy()
+    {
+        return $this->hasMany('App\Models\Payment')->orderBy('id', 'asc');
+    }
+
+
+    public function getSaldoAbonadoAttribute()
+    {
+        return $this->payments()->sum('received_amount');
+    }
+
+    public function getSaldoPendienteAttribute()
+    {
+        $saldoPendiente = $this->payments()->sum('amount') - $this->saldoAbonado;
+        return $saldoPendiente;
+    }
+
+    public function getPagosCompletadosAttribute()
+    {
+        return $this->payments()->where('paid',0)->count();   
+    }
+
     
 }
