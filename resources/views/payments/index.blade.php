@@ -12,7 +12,7 @@
                         <h3 class="mb-0">Pagps realizados</h3>
                     </div>
                     <div class="">
-                        <a href="#" class="btn btn-primary">Descargar</a>
+                        <a href="{{ route('loans.exportExcel') }}" class="btn btn-primary">Descargar</a>
                     </div>
                 </div>
             </div>

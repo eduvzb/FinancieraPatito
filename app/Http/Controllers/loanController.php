@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Loan;
 use App\Models\Payment;
 use Carbon\Carbon;
+use App\Exports\LoansExport;
 
 class loanController extends Controller
 {
@@ -21,6 +22,12 @@ class loanController extends Controller
         return view('loans.index',[
             'loans' => $loans
         ]);
+    }
+
+    public function exportExcel()
+    {
+       $loanExport = new loansExport;
+       return $loanExport->download('loans.xlsx');
     }
 
     /**

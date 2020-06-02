@@ -35,8 +35,11 @@ Route::get('/loans', 'LoanController@index')->name('loans.index');
 Route::get('/loans/new', 'LoanController@create')->name('loans.create');
 Route::post('/loans', 'LoanController@store')->name('loans.store');
 Route::delete('/loans/{id}', 'LoanController@destroy')->name('loans.destroy');
+Route::get('/export-loans-excel', 'LoanController@exportExcel')->name('loans.exportExcel');
 
 Route::get('/payments','PaymentController@index')->name('payments.index');
 Route::get('/payments/{id}', 'PaymentController@show')->name('payments.show');
 Route::get('/payments/pay/{id}', 'PaymentController@pay')->name('payments.pay');
-Route::post('/payments/store/{id}', 'PaymentController@store')->name('payments.store');
+Route::post('/payments/store/{id}', 'PaymentController@store')->name('payments.store'); 
+
+
