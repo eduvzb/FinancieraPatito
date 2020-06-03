@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
+
+    protected $guarded = []; //Permite guardar datos de forma masiva
+
     protected $fillable = [
         'name',
         'phone',

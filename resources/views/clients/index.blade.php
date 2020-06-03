@@ -10,13 +10,25 @@
                         <h3 class="mb-0">Cliente</h3>
                     </div>
                     <div class="">
-                    <a href="{{ route('clients.create') }}" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ route('clients.create') }}" class="btn btn-primary">Nuevo</a>
+                        <a href="{{ route('clients.import') }}" class="btn btn-primary">Cargar clientes</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <table class="table">
+               
+                <table class="table mx-left">
                     <thead>
+                        @if( session('message'))
+                        <div class="alert alert-success" role="alert" id="alert">
+                            {{session('message')}}
+                          </div>
+                        @endif
+                        @if (session('error'))
+                        <div class="alert alert-danger" role="alert" id="alert">
+                            {{session('error')}}
+                          </div>
+                        @endif
                         <tr>
                             <th scope="col">#</th>
                             <th >Nombre</th>
@@ -84,5 +96,12 @@
             }
         });
     });
+</script>
+
+<script>
+    $('#alert').fadeIn();     
+  setTimeout(function() {
+       $("#alert").fadeOut();           
+  },2000);
 </script>
 @endsection

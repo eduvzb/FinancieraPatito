@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Imports\ClientsImport;
+
 class clientController extends Controller
 {
     /**
@@ -53,7 +55,23 @@ class clientController extends Controller
         return redirect()->route('clients.index');
     }
 
-    /**
+    public function import()
+    {
+        return view('clients.import');
+    }
+
+    public function save(Request $request)
+    {
+        try{
+            $loanExport = new ClientsImport;
+            $loanExport->import(request()->file('file'));
+        }catch(\Exception $ex){
+            return redirect()->route('clients.index')->withError('Ha ocurrido un error al cargos todos los datos del archivo');
+        }
+        return redirect()->route('clients.index')->withMessage('Clientes cargados correctamente');
+    }
+
+    /** 
      * Display the specified resource.
      *
      * @param  int  $id
