@@ -46,4 +46,6 @@ Route::get('/payments/{id}', 'PaymentController@show')->name('payments.show');
 Route::get('/payments/pay/{id}', 'PaymentController@pay')->name('payments.pay');
 Route::post('/payments/store/{id}', 'PaymentController@store')->name('payments.store'); 
 
+Route::get('/users/edit', 'UserController@edit')->name('users.edit');
+
 

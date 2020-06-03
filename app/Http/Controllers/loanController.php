@@ -16,6 +16,11 @@ class loanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $loans = Loan::with('client')->get();
