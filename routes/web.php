@@ -47,5 +47,7 @@ Route::get('/payments/pay/{id}', 'PaymentController@pay')->name('payments.pay');
 Route::post('/payments/store/{id}', 'PaymentController@store')->name('payments.store'); 
 
 Route::get('/users/edit', 'UserController@edit')->name('users.edit');
+Route::post('/users/edit-user', 'UserController@update')->name('users.update');
+Route::post('/users/edit-pasword', 'UserController@update_password')->name('users.update_password');
 
 
