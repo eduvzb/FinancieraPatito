@@ -15,12 +15,31 @@
                 </div>
             </div>
             <div class="card-body">
-            <form method="POST" action="{{ route('users.update') }}">
+                @if( session('message'))
+                <div class="alert alert-success" role="alert" id="alert">
+                    {{ session('message')}}
+                </div>
+                @endif
+            <form method="POST" action="{{ route('users.update') }}" enctype="multipart/form-data" >
                     @csrf
+                    <div class="form-group form-row">
+                        <img src="{{ asset( 'storage/img/'.Auth::user()->picture) }}" alt="asd" width="200 px">
+                    </div>
+                    <div class="form-group form-row">
+                        <div class=" col-md-6">
+                            <label for="picture">Nombre</label>
+                            <input type="file" name="picture" id="picture" class="form-control @error('picture') is-invalid @enderror">
+                            @error('picture')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="form-group form-row">
                         <div class=" col-md-6">
                             <label for="name">Nombre</label>
-                            <input value="{{ Auth::user()->name }}" type="text" name="name" id="name" type="text" class="form-control @error('name') is-invalid @enderror">
+                            <input value="{{ Auth::user()->name }}" type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror">
                             @error('name')
                             <div class="invalid-feedback">
                                 {{$message}}
@@ -31,7 +50,7 @@
                     <div class="form-group form-row">   
                         <div class="col-md-6">
                             <label for="phone">Correo</label>
-                            <input value="{{ Auth::user()->email  }}" type="email" name="email" id="email" type="text"class="form-control @error('email') is-invalid @enderror">
+                            <input value="{{ Auth::user()->email  }}" type="email" name="email" id="email"class="form-control @error('email') is-invalid @enderror">
                             @error('email')
                             <div class="invalid-feedback">
                                 {{$message}}
@@ -41,7 +60,7 @@
                     </div>
                   
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-lg">Crear</button>
+                        <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
                     </div>
                 </form>
 
@@ -82,7 +101,7 @@
                     </div>
                   
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-lg">Crear</button>
+                        <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
                     </div>
                     @if (session('status'))
                         <div class="alert alert-success">

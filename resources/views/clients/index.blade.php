@@ -18,12 +18,9 @@
             <div class="card-body">
                
                 <table class="table mx-left">
+                    
                     <thead>
-                        @if( session('message'))
-                        <div class="alert alert-success" role="alert" id="alert">
-                            {{session('message')}}
-                          </div>
-                        @endif
+                       
                         @if (session('error'))
                         <div class="alert alert-danger" role="alert" id="alert">
                             {{session('error')}}

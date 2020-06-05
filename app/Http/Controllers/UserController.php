@@ -24,14 +24,24 @@ class UserController extends Controller
 
     public function update (Request $request)
     {
-        $user = Auth::user();
+        $name =  $request->file('picture')->getClientOriginalName();
+        $path = $request->file('picture')->storeAs('public/img', $name);
 
+        $user = Auth::user();
         $user->name = $request->name;
         $user->email = $request->email;
+
+        $user->picture = $name;
+        
        // dd($user->password);
         $user->save();
 
-        return redirect()->route('users.edit');
+        
+
+
+        return redirect()
+            ->route('users.edit')
+            ->withMessage('Actualizado correctamente');
     }
 
     public function update_password(Request $request)
