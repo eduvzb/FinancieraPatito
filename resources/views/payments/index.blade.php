@@ -39,7 +39,7 @@
                                 <td>$ {{ $loan->amount }}</td>
                                 <td>$ {{ $loan->fee}}  </td>
                                 <td> {{ $loan->payments_number }}</td>
-                                <td>$ {{ $loan->pagosCompletados}} </td>
+                                <td> {{ $loan->pagosCompletados}} </td>
                                 <td>$ {{ $loan->saldoAbonado}}</td>
                                 <td>$ {{ $loan->saldoPendiente}} </td>
                                 <td> 

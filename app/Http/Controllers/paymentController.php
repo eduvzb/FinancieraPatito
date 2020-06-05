@@ -57,9 +57,16 @@ class paymentController extends Controller
          foreach($payments as $payment)
          {
              $amount = $payment->amount;
-             if( $amount > $acum && $acum>0){
-                 //dd($acum);
-                 $payment->received_amount+= $acum;
+             if( $amount > $acum && $acum>0)
+             {
+                 if($acum + $payment->received_amount > $amount)
+                 {
+                     $payment->received_amount = $amount;
+                     $payment->paid = 1;
+
+                 }else{
+                    $payment->received_amount+= $acum;
+                 }
                  $payment->receipt_date = Carbon::now();
                     if($payment->received_amount == $amount){
                         $payment->paid = 1;

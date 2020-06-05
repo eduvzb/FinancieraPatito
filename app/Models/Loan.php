@@ -45,7 +45,7 @@ class Loan extends Model
 
     public function getPagosCompletadosAttribute()
     {
-        return $this->payments()->where('paid',0)->count();   
+        return $this->payments()->where('paid',1)->count();   
     }
 
     
