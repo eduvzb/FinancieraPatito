@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-
-    protected $guarded = []; //Permite guardar datos de forma masiva
+    //Permite guardar datos de forma masiva, se usar para guardar datos desde excel
+    protected $guarded = [];
 
     protected $fillable = [
         'name',
@@ -20,15 +20,4 @@ class Client extends Model
         return $this->hasMany('App\Models\Loan');
     }
 
-  /*   public function delete ()
-    {
-        dd($this);
-        foreach ($this->loans as $loan){
-            foreach($loan->payments as $payment){
-                $payment->delete();
-            }
-            $loan->delete();
-        }
-        return $this->delete();
-    } */
 }

@@ -84,6 +84,8 @@ class paymentController extends Controller
              }
          }
 
+         
+
          return redirect()->route('payments.show', [
              'id'=> $id
          ]);
