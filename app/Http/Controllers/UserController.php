@@ -24,20 +24,29 @@ class UserController extends Controller
 
     public function update (Request $request)
     {
-        $name =  $request->file('picture')->getClientOriginalName();
-        $path = $request->file('picture')->storeAs('public/img', $name);
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'email' => 'required',
+            'picture' => 'image',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('users.edit')
+                        ->withErrors($validator);
+        }
 
         $user = Auth::user();
         $user->name = $request->name;
         $user->email = $request->email;
 
-        $user->picture = $name;
-        
-       // dd($user->password);
+
+        if($request->hasfile('picture'))
+        {
+            $name =  $request->file('picture')->getClientOriginalName();
+            $path = $request->file('picture')->storeAs('public/img', $name);
+            $user->picture = $name;
+        }
         $user->save();
-
-        
-
 
         return redirect()
             ->route('users.edit')
