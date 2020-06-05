@@ -23,7 +23,7 @@
             <form method="POST" action="{{ route('users.update') }}" enctype="multipart/form-data" >
                     @csrf
                     <div class="form-group form-row">
-                        <img src="{{ asset( 'storage/img/'.Auth::user()->picture) }}" alt="asd" width="200 px">
+                        <img src="{{ asset( 'storage/img/'.Auth::user()->picture) }}" alt="asd" width="200 px" >
                     </div>
                     <div class="form-group form-row">
                         <div class=" col-md-6">
