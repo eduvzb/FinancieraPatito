@@ -40,7 +40,7 @@
                                 <td>{{ $client->name }}</td>
                                 <td>{{ $client->phone }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Ver</a>
+                                    <a href="{{ route('clients.edit', ['id' => $client->id]) }}" class="btn btn-outline-secondary btn-sm">Ver</a>
                                     <button class="btn btn-outline-danger btn-sm btn-delete" data-id="{{ $client->id }}" >Borrar</button>
                                 </td>
                             </tr>
@@ -57,11 +57,6 @@
 <script>
     $('body').on('click', '.btn-delete', function(event) {
         const id = $(this).data('id');
-
-        const options = {
-        headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' }
-        };
-
         Swal.fire({
             title: '¿Estás seguro?',
             text: 'No podrás revertir esta acción',
@@ -73,7 +68,7 @@
         })
         .then((result) => {
             if (result.value) {
-                axios.delete('{{ route('clients.index') }}/'+ id, options)  
+                axios.delete('{{ route('clients.index') }}/'+ id)  
                     .then(result => {
                         Swal.fire({
                             title: 'Borrado',

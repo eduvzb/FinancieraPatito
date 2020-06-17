@@ -95,7 +95,10 @@ class clientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::find($id);
+        return view('clients.edit', [
+            'client' => $client
+        ] );
     }
 
     /**
@@ -107,7 +110,20 @@ class clientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required'
+        ]);
+
+        $client = Client::find($id);
+        $client->name = $request->name;
+        $client->address = $request->address;
+        $client->phone = $request->phone;
+        $client->save();
+        
+        return redirect()
+            ->route('clients.index');
     }
 
     /**
@@ -119,8 +135,10 @@ class clientController extends Controller
     public function destroy($id)
     {
         $client = Client::find($id);
-        foreach ($client->loans as $loan){
-            foreach($loan->payments as $payment){
+        foreach ($client->loans as $loan)
+        {
+            foreach($loan->payments as $payment)
+            {
                 $payment->delete();
             }
             $loan->delete();

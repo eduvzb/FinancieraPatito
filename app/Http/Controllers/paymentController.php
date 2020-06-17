@@ -33,7 +33,7 @@ class paymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function pay($id)
+    public function find($id)
     {
         $loan = Loan::find($id);
         return view('payments.pay',[
@@ -83,8 +83,6 @@ class paymentController extends Controller
                  $acum-= $dif;
              }
          }
-
-         
 
          return redirect()->route('payments.show', [
              'id'=> $id

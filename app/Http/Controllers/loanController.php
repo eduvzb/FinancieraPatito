@@ -86,10 +86,6 @@ class loanController extends Controller
                 $count++;
             }
         }
-           
-        
-
-    
         return redirect()->route('loans.index');
     }
 

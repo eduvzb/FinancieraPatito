@@ -25,6 +25,10 @@ Route::get('/clients', 'ClientController@index')
     ->name('clients.index');
 Route::get('/clients/new', 'ClientController@create')
     ->name('clients.create');
+Route::get('/clients/edit/{id}', 'ClientController@edit')
+    ->name('clients.edit');    
+Route::post('/clients/edit/{id}', 'ClientController@update')
+    ->name('clients.update'); 
 Route::post('/clients', 'ClientController@store')
     ->name('clients.store');
 Route::delete('/clients/{id}', 'ClientController@destroy')

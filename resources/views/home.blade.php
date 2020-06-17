@@ -17,7 +17,7 @@
                           <h5 class="card-title">Total de clientes:</h5>
                           <p class="card-text display-3 text-center">{{ $num_clients }}</p>
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
         </div>
