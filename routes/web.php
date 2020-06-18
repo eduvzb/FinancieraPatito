@@ -40,6 +40,8 @@ Route::post('/clients/import/save', 'ClientController@save')
 
 //Route::delete(, 'ClientController@destroy')->name('clients.destroy');
 Route::get('/loans', 'LoanController@index')->name('loans.index');
+Route::get('/loans/edit/{id}', 'LoanController@edit')->name('loans.edit');
+Route::post('/loans/edit/{id}', 'LoanController@update')->name('loans.update');
 Route::get('/loans/new', 'LoanController@create')->name('loans.create');
 Route::post('/loans', 'LoanController@store')->name('loans.store');
 Route::delete('/loans/{id}', 'LoanController@destroy')->name('loans.destroy');

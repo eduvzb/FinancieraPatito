@@ -16,11 +16,8 @@
                 </div>
             </div>
             <div class="card-body">
-               
                 <table class="table mx-left">
-                    
                     <thead>
-                       
                         @if (session('error'))
                         <div class="alert alert-danger" role="alert" id="alert">
                             {{session('error')}}

@@ -17,6 +17,11 @@
             <div class="card-body">
                 <table class="table">
                     <thead>
+                         @if(session('error'))
+                            <div class="alert alert-danger" role="alert" id="alert">
+                                {{session('error')}}
+                            </div>
+                        @endif
                         <tr>
                             <th >Nombre</th>
                             <th >Cantidad</th>
@@ -28,7 +33,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                       @foreach($loans as $loan)
+                       @foreach($loans ?? '' as $loan)
                             <tr>
                                 <td>{{ $loan->client->name }}</td>
                                 <td>{{ $loan->amount }}</td>
@@ -37,7 +42,7 @@
                                 <td>{{ $loan->ministry_date }}</td>
                                 <td>{{ $loan->due_date }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Ver</a>
+                                    <a href="{{ route('loans.edit',['id' => $loan->id]) }}" class="btn btn-outline-secondary btn-sm">Ver</a>
                                     <button class="btn btn-outline-danger btn-sm btn-delete" data-id="{{ $loan->id }}" >Borrar</button>
                                 </td>
                             </tr>
@@ -90,5 +95,12 @@
             }
         });
     });
+</script>
+
+<script>
+    $('#alert').fadeIn();     
+  setTimeout(function() {
+       $("#alert").fadeOut();           
+  },5000);
 </script>
 @endsection

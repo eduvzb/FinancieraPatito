@@ -57,7 +57,6 @@ class loanController extends Controller
      */
     public function store(Request $request)
     {
-
         $loan = new Loan();
         $loan->client_id = $request->client_id;
         $loan->amount = $request->amount;
@@ -67,13 +66,13 @@ class loanController extends Controller
         $loan->due_date = $request->due_date;
         $loan->finished = 0;
         $loan->save();
+
         $date = Carbon::createFromDate($loan->ministry_date); //Guarda la fecha en la varible date
-        
         $count = 0;
         while($count < $loan->payments_number)
         {
             $date->addDay(); //Incrementa un día a la fecha date
-            if($date->isWeekday()) //Verificar si date es día de semana
+            if($date->isWeekday()) //Verifica si date es día de semana
             {
                 $payment = new Payment();
                 $payment->client_id = $loan->client_id;
@@ -89,29 +88,7 @@ class loanController extends Controller
         return redirect()->route('loans.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
+  /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -120,8 +97,66 @@ class loanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $loan = Loan::find($id);
+        $saldoAbonado = $loan->saldoAbonado;
+       
+        if( $saldoAbonado > 0){
+            return redirect()->route('loans.index')
+                ->withError('No puede editar un prestamo que tenga pagos registrados.');
+        }
+        else{ //Editar el prestamo
+
+            $loan->client_id = $request->client_id;
+            $loan->amount = $request->amount;
+            $loan->payments_number = $request->payments_number;
+            $loan->fee = $request->fee;
+            $loan->ministry_date = $request->ministry_date;
+            $loan->due_date = $request->due_date;
+            $loan->finished = 0;
+            $loan->save();
+
+            //Borrar payments
+            Payment::where('loan_id',$id)->delete();
+
+            $date = Carbon::createFromDate($loan->ministry_date); //Guarda la fecha en la varible date
+            $count = 0;
+            while($count < $loan->payments_number)
+            {
+                $date->addDay(); //Incrementa un día a la fecha date
+                if($date->isWeekday()) //Verifica si date es día de semana
+                {
+                    $payment = new Payment();
+                    $payment->client_id = $loan->client_id;
+                    $payment->loan_id = $loan->id;
+                    $payment->number = $count+1;
+                    $payment->amount = $loan->fee;
+                    $payment->received_amount = 0;
+                    $payment->payment_date = $date;
+                    $payment->save();
+                    $count++;
+                }
+            }
+            return redirect()->route('loans.index');
+        }
     }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $loan = Loan::find($id);
+        $name = Client::pluck('id','name');
+        $names = $name->all();
+        return view('loans.edit', [
+            'loan' => $loan,
+            'names' => $names,
+        ]);
+    }
+
+    
 
     /**
      * Remove the specified resource from storage.

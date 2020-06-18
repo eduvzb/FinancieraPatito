@@ -40,6 +40,14 @@ class paymentController extends Controller
             'loan' => $loan
         ]);
     }
+    
+    public function pay($id)
+    {
+        $loan = Loan::find($id);
+        return view('payments.pay',[
+            'loan' => $loan
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
