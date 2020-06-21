@@ -122,8 +122,7 @@ class clientController extends Controller
         $client->phone = $request->phone;
         $client->save();
         
-        return redirect()
-            ->route('clients.index');
+        return redirect()->route('clients.index');
     }
 
     /**

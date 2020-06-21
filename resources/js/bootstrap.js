@@ -23,6 +23,10 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+window.moment = require('moment');
+var moment = require('moment-business-days');
+var $ = require( "jquery" );
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

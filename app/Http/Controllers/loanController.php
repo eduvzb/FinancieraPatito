@@ -57,6 +57,15 @@ class loanController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'client_id' => 'required',
+            'amount' => 'required',
+            'payments_number' => 'required',
+            'fee' => 'required',
+            'ministry_date' => 'required',
+            'due_date' => 'required',
+        ]);
+
         $loan = new Loan();
         $loan->client_id = $request->client_id;
         $loan->amount = $request->amount;
@@ -97,6 +106,16 @@ class loanController extends Controller
      */
     public function update(Request $request, $id)
     {
+            
+        $request->validate([
+            'client_id' => 'required',
+            'amount' => 'required',
+            'payments_number' => 'required',
+            'fee' => 'required',
+            'ministry_date' => 'required',
+            'due_date' => 'required',
+        ]);
+
         $loan = Loan::find($id);
         $saldoAbonado = $loan->saldoAbonado;
        

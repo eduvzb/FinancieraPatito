@@ -25,7 +25,6 @@ class UserController extends Controller
     public function update (Request $request)
     {
         $file = $request->hasfile('picture');
-        dd($file);
         $validator = Validator::make($request->all(),[
             'name' => 'required',
             'email' => 'required',
