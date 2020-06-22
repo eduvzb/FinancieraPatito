@@ -23,7 +23,7 @@ class loanController extends Controller
 
     public function index()
     {
-        $loans = Loan::with('client')->get();
+        $loans = Loan::with('client')->orderBy('id')->get();
         return view('loans.index',[
             'loans' => $loans
         ]);
@@ -166,12 +166,9 @@ class loanController extends Controller
      */
     public function edit($id)
     {
-        $loan = Loan::find($id);
-        $name = Client::pluck('id','name');
-        $names = $name->all();
+        $loan = Loan::with('client')->find($id);
         return view('loans.edit', [
             'loan' => $loan,
-            'names' => $names,
         ]);
     }
 
