@@ -42,7 +42,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text">$</label>
                                   </div>
-                                <input type="number" name="amount" id="amount" type="text"class="form-control @error('amount') is-invalid @enderror">
+                                <input type="number" name="amount" id="amount" type="text"class="form-control" @error('amount') is-invalid @enderror">
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text">#</label>
                                   </div>
-                                <input type="number" name="payments_number" id="payments_number" type="text"class="form-control @error('payments_number') is-invalid @enderror">
+                                <input type="number" name="payments_number" id="payments" type="text"class="form-control @error('payments_number')" is-invalid @enderror">
                                 @error('amount')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -67,7 +67,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text">$</label>
                                   </div>
-                                <input type="number" name="fee" id="fee" type="text"class="form-control @error('fee') is-invalid @enderror">
+                                <input type="number" name="fee" id="cuota" class="form-control" @error('fee') is-invalid @enderror">
                                 @error('fee')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -83,7 +83,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text">Fecha</label>
                                   </div>
-                                <input type="date" name="ministry_date" id="ministry_date" type="text"class="form-control @error('ministry_date') is-invalid @enderror">
+                                <input type="date" name="ministry_date" id="firstDate" type="text"class="form-control" @error('ministry_date') is-invalid @enderror">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -92,7 +92,7 @@
                                 <div class="input-group-prepend">
                                     <label class="input-group-text">Fecha</label>
                                   </div>
-                                <input type="date" name="due_date" id="due_date" type="text"class="form-control @error('due_date') is-invalid @enderror">
+                                <input type="date" name="due_date" id="lastDate" type="text"class="form-control" @error('due_date') is-invalid @enderror">
                             </div>
                         </div>
                     </div>
@@ -107,5 +107,20 @@
     </div>
 </div>
 
-
+<script>
+    var noCuotas;
+    var quantity;
+    var pago;
+    $('#payments').change(function(){
+        noCuotas = $(this).val();
+        var date = $("#firstDate").val();
+        var realDate = moment(date, 'YYYY-MM-DD').businessAdd(noCuotas)._d
+        $("#lastDate").val(moment(realDate).format("YYYY-MM-DD"));
+    });
+    $("#firstDate").change(function(){
+        var date = $("#firstDate").val();
+        var realDate = moment(date, 'YYYY-MM-DD').businessAdd(noCuotas)._d
+        $("#lastDate").val(moment(realDate).format("YYYY-MM-DD"));
+    });
+</script>
 @endsection
